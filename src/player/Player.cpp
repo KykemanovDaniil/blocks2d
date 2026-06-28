@@ -1,19 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include "player/Player.hpp"
 #include "math/random/Random.hpp"
-#include "world/World.hpp"
 
 void Player::setPosition(const sf::Vector2f& newPosition) {
     position = newPosition;
-}
-
-void Player::spawnOnSurface(const int distance, std::vector<Terrain::Chunk>& worldChunks) {
-    int spawnBlockX = Random::inRange(-distance, distance);
-    
-    float spawnX = (static_cast<float>(spawnBlockX) * Terrain::BLOCK_SIZE) + (Terrain::BLOCK_SIZE / 2.0f);
-    float spawnY = Terrain::getSurfaceY(worldChunks, spawnX);
-
-    position = sf::Vector2f(spawnX, spawnY - playerH / 2);
 }
 
 void Player::movementPlayer() {

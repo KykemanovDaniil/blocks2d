@@ -3,7 +3,7 @@
 
 #include "core/Config.hpp"
 
-#include "world/World.hpp"
+#include "terrain/Terrain.hpp"
 #include "player/Player.hpp"
 #include "camera/Camera.hpp"
 
@@ -13,7 +13,7 @@ int main() {
     sf::RenderWindow window(sf::VideoMode({Config::windowW, Config::windowH}), "Blocks2d");
     window.setFramerateLimit(60);
 
-    if (!Terrain::blockAtlas.loadFromFile("res/textures/blockAtlas.png")) {
+    if (!Terrain.atlas.loadFromFile("res/textures/blockAtlas.png")) {
         std::cerr << "LOAD FAILED : Terrain::blockAtlas";
     }
 

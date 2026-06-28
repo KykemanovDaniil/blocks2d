@@ -1,20 +1,10 @@
-#pragma once 
-#include <SFML/Graphics.hpp>
-#include <cstdint>
+#pragma once
+
 #include <vector>
+#include "../chunk/Chunk.hpp"
 
-namespace Terrain {
-    constexpr unsigned int BLOCK_SIZE = 32;
+struct World {
+    std::vector<Chunk> chunks;
 
-
-
-    inline sf::Texture blockAtlas;
-
-    struct World {
-        std::vector<Chunk> chunks;
-    };
-
-    float getSurfaceY(const std::vector<Chunk>& chunks, float pX);
-
-
-}
+    float getSurfaceY(float playerX);
+};
