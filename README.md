@@ -1,6 +1,7 @@
 # Blocks2D
 2D RPG with sandbox elements
 
-#Get started
-#tech stack
-c++ 23, SFML 2.5, FastNoiseLite
+## Tech Stack
+* **Language:** C++ 23
+* **Graphics/Multimedia:** SFML 2.5
+* **Generation:** FastNoiseLite
