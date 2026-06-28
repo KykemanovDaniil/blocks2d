@@ -3,5 +3,5 @@
 
 ## Tech Stack
 * **Language:** C++ 23
-* **Graphics/Multimedia:** SFML 2.5
+* **Multimedia:** SFML 2.5
 * **Generation:** FastNoiseLite
