@@ -23,7 +23,7 @@ int main() {
 
     Player player;
     Camera camera;
-    camera.setZoom(6.0f);
+    camera.setZoom(1.0f);
         
     float fpsTimer = 0.0f;
     int frameCount = 0;
@@ -50,6 +50,12 @@ int main() {
             if (event.type == sf::Event::KeyPressed) {
                 if (event.key.code == sf::Keyboard::F8) {
                     window.close();
+                }
+                if (event.key.code == sf::Keyboard::I) {
+                    camera.setZoom(camera.getZoom() + 0.1f);
+                }
+                if (event.key.code == sf::Keyboard::O) {
+                    camera.setZoom(camera.getZoom() - 0.1f);
                 }
             }
         }

@@ -11,7 +11,6 @@ constexpr unsigned int BLOCK_SIZE = 32;
 
 class Chunk {
 public:
-    void init();
     void updateGeometry();
 
     int getX() noexcept {

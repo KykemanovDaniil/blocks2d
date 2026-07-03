@@ -7,8 +7,12 @@ public:
     Camera() = default;
 
     void setZoom(float zoom) noexcept {
-        m_currentZoom = zoom;
-        m_view.setSize(m_baseSize * m_currentZoom);
+        m_zoom = zoom;
+        m_view.setSize(m_baseSize * m_zoom);
+    }
+
+    float getZoom() noexcept {
+        return m_zoom;
     }
 
     void setLerp(float lerp) noexcept {
@@ -29,7 +33,7 @@ public:
 
     void updateLerp(const sf::Vector2f target, float deltaTime) noexcept;
 private:
-    float m_currentZoom{1.0f};
+    float m_zoom{1.0f};
     float m_lerp{7.0f};
     sf::Vector2f m_baseSize{1280, 720};
 

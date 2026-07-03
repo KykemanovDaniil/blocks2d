@@ -9,6 +9,7 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang
 endif()
 
 find_package(SFML 2.5 REQUIRED COMPONENTS graphics window system)
+find_package(OpenGL REQUIRED)
 
 file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
@@ -20,7 +21,7 @@ add_executable(Blocks2d ${PROJECT_SOURCES})
 
 target_include_directories(Blocks2d PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}")
 
-target_link_libraries(Blocks2d PRIVATE sfml-graphics sfml-window sfml-system)
+target_link_libraries(Blocks2d PRIVATE sfml-graphics sfml-window sfml-system OpenGL::GL)
 
 add_custom_command(TARGET Blocks2d POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory

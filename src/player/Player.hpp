@@ -21,7 +21,7 @@ public:
     }
 private:
     sf::Vector2f m_position{0.0f, 0.0f};
-    float m_speed{300.0f};
+    float m_speed{900.0f};
 
     mutable sf::RectangleShape m_shape;
     

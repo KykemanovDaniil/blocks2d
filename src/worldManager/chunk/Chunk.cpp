@@ -1,38 +1,6 @@
 #include "Chunk.hpp"
 #include "src/worldManager/blockData/BlockData.hpp"
 
-void Chunk::init() {
-    for (unsigned int y = 0; y < CHUNK_H; ++y) {
-        for (unsigned int x = 0; x < CHUNK_W; ++x) {
-            unsigned int index = x + (y * CHUNK_W);
-            if (y < 20) {
-                blocks[index] = BlockType::Air;                
-            } 
-            else if (y == 20) {
-                blocks[index] = BlockType::Grass;  
-            } 
-            else if (y > 20 && y <= 23) {
-                blocks[index] = BlockType::Loam;
-            } 
-            else if (y > 23 && y <= 28) {
-                blocks[index] = BlockType::Grus;
-            } 
-            else if (y > 28 && y <= 32) {
-                blocks[index] = BlockType::Water_bearing_gravel; 
-            } 
-            else if (y > 32 && y <= 119) {
-                blocks[index] = BlockType::Limestone;     
-            } 
-            else if (y > 119 && y <= 125) {
-                blocks[index] = BlockType::Andesite;   
-            } 
-            else {
-                blocks[index] = BlockType::Basalt;         
-            }
-        }
-    }
-}
-
 void Chunk::updateGeometry() {
 
     m_mesh.setPrimitiveType(sf::PrimitiveType::Triangles);
@@ -70,7 +38,7 @@ void Chunk::updateGeometry() {
 
             unsigned int atlasIndex = data.m_texIndex; 
 
-            int TEX_SIZE = 18;
+            int TEX_SIZE = 32;
 
             float texX0 = static_cast<float>(atlasIndex * TEX_SIZE);
             float texX1 = texX0 + TEX_SIZE;

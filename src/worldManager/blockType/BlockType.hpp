@@ -3,10 +3,10 @@
 
 enum class BlockType : uint8_t {
     Air = 0, 
-    Grass, 
     Loam, 
+    Grass, 
     Grus,
-    Water_bearing_gravel,
+    Gravel,
     Limestone,
     Andesite,
     Basalt
