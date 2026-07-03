@@ -13,11 +13,12 @@ find_package(SFML 2.5 REQUIRED COMPONENTS graphics window system)
 file(GLOB_RECURSE PROJECT_SOURCES CONFIGURE_DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/*.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h"
 )
 
 add_executable(Blocks2d ${PROJECT_SOURCES})
 
-target_include_directories(Blocks2d PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/src")
+target_include_directories(Blocks2d PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}")
 
 target_link_libraries(Blocks2d PRIVATE sfml-graphics sfml-window sfml-system)
 

@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "core/Config.hpp"
+#include "src/core/Config.hpp"
 
 class Camera {
 public:

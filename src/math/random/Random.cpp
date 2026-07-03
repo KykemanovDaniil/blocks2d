@@ -1,4 +1,4 @@
-#include "math/random/Random.hpp"
+#include "src/math/random/Random.hpp"
 #include <random>
 
 int Random::inRange(const int min, const int max) {

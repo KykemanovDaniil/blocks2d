@@ -1,5 +1,5 @@
 #pragma once
-#include "../blockType/BlockType.hpp"
+#include "src/worldManager/blockType/BlockType.hpp"
 #include <array>
 #include <cstddef>
 

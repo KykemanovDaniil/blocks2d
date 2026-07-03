@@ -2,18 +2,16 @@
 #include <SFML/Graphics.hpp>
 #include <print>
 
-#include "core/Config.hpp"
+#include "src/core/Config.hpp"
 
-#include "player/Player.hpp"
-#include "camera/Camera.hpp"
-#include "worldManager/blockData/BlockData.hpp"
-#include "worldManager/WorldManager.hpp"
-
-constexpr int CHUNKS = 5;
+#include "src/player/Player.hpp"
+#include "src/camera/Camera.hpp"
+#include "src/worldManager/blockData/BlockData.hpp"
+#include "src/worldManager/WorldManager.hpp"
 
 int main() {
     sf::RenderWindow window(sf::VideoMode({Config::windowW, Config::windowH}), "Blocks2d");
-    window.setFramerateLimit(60);
+    window.setFramerateLimit(Config::windowFps);
 
     initBlockData();
 
@@ -21,14 +19,28 @@ int main() {
 
     WorldManager worldManager;
     worldManager.loadAtlasTexture("res/textures/blockAtlas.png");
-    worldManager.createWorld(15);
+    worldManager.createWorld(5);
 
     Player player;
     Camera camera;
-    camera.setZoom(1.0f);
-    
+    camera.setZoom(6.0f);
+        
+    float fpsTimer = 0.0f;
+    int frameCount = 0;
+    int currentFps = 0;
+
     while (window.isOpen()) {
         float deltaTime = clock.restart().asSeconds();
+
+        fpsTimer += deltaTime;
+        frameCount++;
+
+        if (fpsTimer >= 1.0f) {
+            currentFps = frameCount;
+            frameCount = 0;
+            fpsTimer = 0.0f;
+            std::println("FPS: {}", currentFps);
+        }
 
         sf::Event event;
         while (window.pollEvent(event)) {

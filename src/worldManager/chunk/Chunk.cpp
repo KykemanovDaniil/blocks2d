@@ -1,5 +1,5 @@
 #include "Chunk.hpp"
-#include "../blockData/BlockData.hpp"
+#include "src/worldManager/blockData/BlockData.hpp"
 
 void Chunk::init() {
     for (unsigned int y = 0; y < CHUNK_H; ++y) {
@@ -24,7 +24,7 @@ void Chunk::init() {
                 blocks[index] = BlockType::Limestone;     
             } 
             else if (y > 119 && y <= 125) {
-                blocks[index] = BlockType::Basaltite;   
+                blocks[index] = BlockType::Andesite;   
             } 
             else {
                 blocks[index] = BlockType::Basalt;         

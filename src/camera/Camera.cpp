@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include "camera/Camera.hpp"
+#include "src/camera/Camera.hpp"
 #include <cmath>
 
 void Camera::updateLerp(sf::Vector2f target, float deltaTime) noexcept {

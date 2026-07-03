@@ -15,7 +15,7 @@ void initBlockData() {
 
     BlockRegistry[static_cast<size_t>(BlockType::Limestone)] = {BlockType::Limestone, true, 4};
 
-    BlockRegistry[static_cast<size_t>(BlockType::Basaltite)] = {BlockType::Basaltite, true, 6};
+    BlockRegistry[static_cast<size_t>(BlockType::Andesite)] = {BlockType::Andesite, true, 6};
 
     BlockRegistry[static_cast<size_t>(BlockType::Basalt)] = {BlockType::Basalt, true, 7};
 }

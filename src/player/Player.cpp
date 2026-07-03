@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include "player/Player.hpp"
+#include "src/player/Player.hpp"
 #include <cmath>
 
 Player::Player() {

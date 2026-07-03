@@ -8,6 +8,6 @@ enum class BlockType : uint8_t {
     Grus,
     Water_bearing_gravel,
     Limestone,
-    Basaltite,
+    Andesite,
     Basalt
 };

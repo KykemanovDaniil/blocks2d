@@ -1,9 +1,10 @@
+#pragma once
 #include <SFML/Graphics.hpp>
 #include <vector>
-#include "../blockType/BlockType.hpp"
+#include "src/worldManager/blockType/BlockType.hpp"
 
 constexpr unsigned int CHUNK_W = 16;
-constexpr unsigned int CHUNK_H = 128;
+constexpr unsigned int CHUNK_H = 256;
 constexpr unsigned int CHUNK_SIZE = CHUNK_W * CHUNK_H;
 
 constexpr unsigned int BLOCK_SIZE = 32;
@@ -20,6 +21,20 @@ public:
     void setX(int x) noexcept {
         m_x = x;
     }
+
+    BlockType getLocalBlock(unsigned int x, unsigned int y) noexcept {
+        if (x < CHUNK_W && y < CHUNK_H) {
+            return blocks[x + (y * CHUNK_W)];
+        }
+        return BlockType::Air;
+    }
+
+    void setLocalBlock(unsigned int x, unsigned int y, BlockType type) noexcept {
+        if (x < CHUNK_W && y < CHUNK_H) {
+            blocks[x + (y * CHUNK_W)] = type;
+        }
+    }
+
 
     void draw(sf::RenderTarget& target, const sf::Texture& atlas) const {
         target.draw(m_mesh, &atlas);
