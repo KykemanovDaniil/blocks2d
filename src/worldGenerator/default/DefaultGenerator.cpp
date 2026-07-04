@@ -4,8 +4,8 @@
 
 DefaultGenerator::DefaultGenerator(int seed) {
     m_landscapeNoise.SetSeed(seed);
-    m_landscapeNoise.SetNoiseType(FastNoiseLite::NoiseType_ValueCubic);
-    m_landscapeNoise.SetFrequency(0.06f);
+    m_landscapeNoise.SetNoiseType(FastNoiseLite::NoiseType_OpenSimplex2);
+    m_landscapeNoise.SetFrequency(0.007f);
 }
 
 void DefaultGenerator::generate(Chunk& chunk, int chunkX) {
@@ -41,6 +41,9 @@ void DefaultGenerator::generateVegetation(Chunk& chunk, int chunkX) {
         for (unsigned int y = 0; y < CHUNK_H; ++y) {
             if (y == surfaceY) {
                 chunk.setLocalBlock(x, y, BlockType::Grass);
+            }
+            else if (y > surfaceY && y < surfaceY + 5) {
+                chunk.setLocalBlock(x, y, BlockType::Loam);
             }
         }
     }

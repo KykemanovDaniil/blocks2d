@@ -4,7 +4,7 @@
 
 class DefaultGenerator {
 public:
-    DefaultGenerator(int seed = 1337);
+    DefaultGenerator(int seed = 0);
 
     void generate(Chunk& chunk, int chunkX);
 
@@ -13,7 +13,7 @@ private:
 
     unsigned int calculateSurfaceY(int globalX) const {
         float noiseVal = const_cast<FastNoiseLite&>(m_landscapeNoise).GetNoise(static_cast<float>(globalX), 0.0f);
-        return m_baseLevel + static_cast<int>(noiseVal * 20.0f);
+        return m_baseLevel + static_cast<int>(noiseVal * 30.0f);
     }
 
     void generateLandscape(Chunk& chunk, int chunkX);

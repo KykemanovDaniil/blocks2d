@@ -19,7 +19,7 @@ int main() {
 
     WorldManager worldManager;
     worldManager.loadAtlasTexture("res/textures/blockAtlas.png");
-    worldManager.createWorld(5);
+    worldManager.createWorld(25);
 
     Player player;
     Camera camera;
