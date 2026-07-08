@@ -8,6 +8,8 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang
     add_compile_options(-Wall -Wextra -Wpedantic)
 endif()
 
+set(SFML_STATIC_LIBRARIES ON)
+
 find_package(SFML 3.1 REQUIRED COMPONENTS Graphics Window System)
 find_package(OpenGL REQUIRED)
 

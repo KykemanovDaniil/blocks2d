@@ -14,10 +14,13 @@ public:
             return;
         }
         m_blockAtlas.setSmooth(false);
-        m_blockAtlas.generateMipmap();
+        (void)m_blockAtlas.generateMipmap();
+        
         sf::Texture::bind(&m_blockAtlas);
+        
         GLint maxLevel = 5; 
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, maxLevel);
+        
         sf::Texture::bind(nullptr);
     }
 
