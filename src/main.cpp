@@ -7,7 +7,7 @@
 
 #include "src/player/Player.hpp"
 #include "src/camera/Camera.hpp"
-#include "src/worldManager/blockData/BlockData.hpp"
+#include "src/worldManager/TileData/TileData.hpp"
 #include "src/worldManager/WorldManager.hpp"
 
 int main() {
@@ -15,6 +15,7 @@ int main() {
     window.setFramerateLimit(Config::windowFps);
 
     initBlockData();
+    initWallData();
 
     sf::Clock clock;
 

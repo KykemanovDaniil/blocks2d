@@ -1,5 +1,5 @@
 #include "src/worldGenerator/default/DefaultGenerator.hpp"
-#include "src/worldManager/blockType/BlockType.hpp" 
+#include "src/worldManager/TileType/TileType.hpp" 
 #include <cmath>
 
 DefaultGenerator::DefaultGenerator(int seed) {
@@ -29,27 +29,27 @@ void DefaultGenerator::generateLandscape(Chunk& chunk, int chunkX) {
             
             if (y >= CHUNK_H - 3) {
                 chunk.setLocalBlock(x, y, BlockType::Basalt);
+                chunk.setLocalWall(x, y, WallType::Basalt);
             }
             else if (y >= CHUNK_H - 29) {
                 chunk.setLocalBlock(x, y, BlockType::Andesite);
+                chunk.setLocalWall(x, y, WallType::Andesite);
             }
             else if (y < surfaceY) {
                 chunk.setLocalBlock(x, y, BlockType::Air);
-            }
-            else if (y == surfaceY) {
-                chunk.setLocalBlock(x, y, BlockType::Grass);
-            }
-            else if (y > surfaceY && y < surfaceY + 5) {
-                chunk.setLocalBlock(x, y, BlockType::Loam);
+                chunk.setLocalWall(x, y, WallType::None);
             }
             else if (y > surfaceY && y <= surfaceY + 7) {
                 chunk.setLocalBlock(x, y, BlockType::Grus);
+                chunk.setLocalWall(x, y, WallType::Grus);
             }
             else if (y > surfaceY && y <= surfaceY + 9) {
                 chunk.setLocalBlock(x, y, BlockType::Gravel);
+                chunk.setLocalWall(x, y, WallType::Gravel);
             }
             else {
-                chunk.setLocalBlock(x, y, BlockType::Limestone);              
+                chunk.setLocalBlock(x, y, BlockType::Limestone);    
+                chunk.setLocalWall(x, y, WallType::Limestone);          
             }  
         }
     }
@@ -63,9 +63,11 @@ void DefaultGenerator::generateVegetation(Chunk& chunk, int chunkX) {
         for (unsigned int y = 0; y < CHUNK_H; ++y) {
             if (y == surfaceY) {
                 chunk.setLocalBlock(x, y, BlockType::Grass);
+                chunk.setLocalWall(x, y, WallType::Grass);
             }
             else if (y > surfaceY && y < surfaceY + 5) {
                 chunk.setLocalBlock(x, y, BlockType::Loam);
+                chunk.setLocalWall(x, y, WallType::Loam);
             }
         }
     }

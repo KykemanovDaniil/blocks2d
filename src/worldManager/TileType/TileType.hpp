@@ -9,5 +9,16 @@ enum class BlockType : uint8_t {
     Gravel,
     Limestone,
     Andesite,
-    Basalt
+    Basalt,
+};
+
+enum class WallType : uint8_t {
+    None, 
+    Loam, 
+    Grass, 
+    Grus,
+    Gravel,
+    Limestone,
+    Andesite,
+    Basalt,
 };
