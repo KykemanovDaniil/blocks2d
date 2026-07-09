@@ -1,39 +1,36 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "src/core/Config.hpp"
 
 class Camera {
 public:
     Camera() = default;
 
-    void setZoom(float zoom) noexcept {
-        m_zoom = zoom;
-        m_view.setSize(m_baseSize * m_zoom);
-    }
+    // ZOOM
+    void setZoom(float zoom) noexcept;
+    float getZoom() const noexcept { return m_zoom; }
+    float getCurrentZoom() const noexcept { return m_currentZoom; }
 
-    float getZoom() noexcept {
-        return m_zoom;
-    }
+    // LERP
+    void setLerp(float lerp) noexcept { m_lerp = lerp; }
 
-    void setLerp(float lerp) noexcept {
-        m_lerp = lerp;
-    }
+    // CENTER
+    void setCenter(const sf::Vector2f center) noexcept;
 
-    void setCenter(const sf::Vector2f center) noexcept {
-        m_view.setCenter(center);
-    }
+    // SIZE
+    void setSize(const sf::Vector2f size) noexcept;
 
-    void setSize(const sf::Vector2f size) noexcept {
-        m_view.setSize(size);
-    }
+    // VIEW
+    void setView(sf::RenderTarget& target) noexcept;
 
-    void setView(sf::RenderTarget& target) noexcept {
-        target.setView(m_view);
-    }
+    // BASE SIZE
+    sf::Vector2f getBaseSize() const noexcept { return m_baseSize; }
 
+    // OTHER
     void updateLerp(const sf::Vector2f target, float deltaTime) noexcept;
+
 private:
     float m_zoom{1.0f};
+    float m_currentZoom{1.0f};
     float m_lerp{7.0f};
     sf::Vector2f m_baseSize{1280, 720};
 

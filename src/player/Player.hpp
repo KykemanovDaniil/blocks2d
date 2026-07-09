@@ -13,6 +13,14 @@ public:
         return m_position;
     }
 
+    float getSpeed() const noexcept {
+        return m_speed;
+    }
+
+    void setSpeed(float speed) {
+        m_speed = speed;
+    }
+
     void update(float deltaTime) noexcept;
     
     void draw(sf::RenderTarget& target) const {

@@ -21,7 +21,7 @@ void Chunk::updateGeometry() {
     constexpr int TEX_SIZE = 32;
 
     auto addTileToMesh = [&](unsigned int x, unsigned int y, unsigned int texIndex, sf::Color color) {
-        float posX0 = static_cast<float>(static_cast<int>(x) + m_x * static_cast<int>(CHUNK_W)) * TILE_SIZE;
+        float posX0 = getGlobalX() + x * TILE_SIZE;
         float posX1 = posX0 + TILE_SIZE;
         float posY0 = static_cast<float>(y) * TILE_SIZE;
         float posY1 = posY0 + TILE_SIZE;
@@ -64,7 +64,7 @@ void Chunk::updateGeometry() {
             
             if (blocks[index] == BlockType::Air && walls[index] != WallType::None) {
                 const auto& data = WallRegistry[static_cast<size_t>(walls[index])];
-                addTileToMesh(x, y, data.m_texIndex, sf::Color(100, 100, 100));
+                addTileToMesh(x, y, data.m_texIndex, sf::Color(175, 175, 175));
             }
         }
     }

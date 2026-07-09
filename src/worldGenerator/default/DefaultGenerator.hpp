@@ -24,6 +24,8 @@ private:
     void generateLandscape(Chunk& chunk, int chunkX);
     void generateVegetation(Chunk& chunk, int chunkX);
     void generateCaves(Chunk& chunk, int chunkX);
+    void generateTrees(Chunk& chunk, int chunkX);
+
     static constexpr int m_baseLevel = 74;
     static constexpr int m_seaLevel = 64;
 };

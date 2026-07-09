@@ -21,7 +21,7 @@ int main() {
 
     WorldManager worldManager;
     worldManager.loadAtlasTexture("res/textures/blockAtlas.png");
-    worldManager.createWorld(25);
+    worldManager.createWorld(500);
 
     Player player;
     Camera camera;
@@ -45,25 +45,28 @@ int main() {
         }
 
         while (const std::optional<sf::Event> event = window.pollEvent()) {
-            
             if (event->is<sf::Event::Closed>()) {
                 window.close();
             }
 
-            if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>()) {
-                if (keyPressed->code == sf::Keyboard::Key::F8) {
+            if (const auto* keyPressedEvent = event->getIf<sf::Event::KeyPressed>()) {
+                if (keyPressedEvent->code == sf::Keyboard::Key::F8) {
                     window.close();
-                }
-                if (keyPressed->code == sf::Keyboard::Key::I) {
-                    camera.setZoom(camera.getZoom() + 0.1f);
-                }
-                if (keyPressed->code == sf::Keyboard::Key::O) {
-                    camera.setZoom(camera.getZoom() - 0.1f);
                 }
             }
         }
 
         player.update(deltaTime);
+
+        float zoomSpeed = 3.5f; 
+
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::O)) {
+            camera.setZoom(camera.getZoom() - (zoomSpeed * camera.getZoom() * deltaTime));
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scancode::I)) {
+            camera.setZoom(camera.getZoom() + (zoomSpeed * camera.getZoom() * deltaTime));
+        }
+
         camera.updateLerp(player.getPosition(), deltaTime);
 
         // RENDER
@@ -72,7 +75,7 @@ int main() {
 
         camera.setView(window);
 
-        worldManager.draw(window);
+        worldManager.draw(window, player, camera);
 
         player.draw(window);
 

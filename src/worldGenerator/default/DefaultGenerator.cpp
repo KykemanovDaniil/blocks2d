@@ -1,5 +1,6 @@
 #include "src/worldGenerator/default/DefaultGenerator.hpp"
 #include "src/worldManager/TileType/TileType.hpp" 
+#include "src/worldGenerator/default/structure/tree/TreeGenerator.hpp"
 #include <cmath>
 
 DefaultGenerator::DefaultGenerator(int seed) {
@@ -10,12 +11,15 @@ DefaultGenerator::DefaultGenerator(int seed) {
     m_cavesNoise.SetSeed(seed + 1); 
     m_cavesNoise.SetNoiseType(FastNoiseLite::NoiseType_Perlin);
     m_cavesNoise.SetFrequency(0.019f);
+
+    std::srand(static_cast<unsigned int>(seed));
 }
 
 void DefaultGenerator::generate(Chunk& chunk, int chunkX) {
     generateLandscape(chunk, chunkX);
     generateVegetation(chunk, chunkX);
     generateCaves(chunk, chunkX);
+    generateTrees(chunk, chunkX);
 
     chunk.updateGeometry();
 }
@@ -88,5 +92,25 @@ void DefaultGenerator::generateCaves(Chunk& chunk, int chunkX) {
                 chunk.setLocalBlock(x, y, BlockType::Air);
             }
         }
+    }
+}
+
+void DefaultGenerator::generateTrees(Chunk& chunk, int chunkX) {
+    for (unsigned int x = 0; x < CHUNK_W; ++x) {
+        int globalX = chunkX * CHUNK_W + x;
+        unsigned int surfaceY = calculateSurfaceY(globalX);
+
+        // 1. Деревья не должны расти на каждом блоке. Сделаем шанс появления (например, 15%)
+        if (std::rand() % 100 > 15) {
+            continue; 
+        }
+
+        // 2. Проверяем, что под деревом реально Трава, а не воздух из-за пещеры или генерации
+        if (chunk.getLocalBlock(x, surfaceY) != BlockType::Grass) {
+            continue;
+        }
+
+        generateTree(chunk, x, surfaceY);
+
     }
 }

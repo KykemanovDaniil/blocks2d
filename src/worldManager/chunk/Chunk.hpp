@@ -9,16 +9,23 @@ constexpr unsigned int CHUNK_SIZE = CHUNK_W * CHUNK_H;
 
 constexpr unsigned int TILE_SIZE = 32;
 
+constexpr unsigned int CHUNK_W_PIXELS = CHUNK_W * TILE_SIZE;
+constexpr unsigned int CHUNK_H_PIXELS = CHUNK_H * TILE_SIZE;
+
 class Chunk {
 public:
     void updateGeometry();
 
-    int getX() noexcept {
+    int getLocalX() noexcept {
         return m_x;
     }
-
-    void setX(int x) noexcept {
+    void setLocalX(int x) noexcept {
         m_x = x;
+    }
+
+    float getGlobalX() const noexcept {
+        float globalX{static_cast<float>(m_x * static_cast<int>(CHUNK_W)) * TILE_SIZE};
+        return globalX;
     }
 
     // FOR BLOCKS
