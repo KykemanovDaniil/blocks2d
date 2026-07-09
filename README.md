@@ -1,5 +1,5 @@
 # Blocks2D
-This is my pet project to create a 2D block engine.
+This is my pet project to create a 2D sandbox game. It runs on its own custom engine written in C++, designed to be lightweight and playable even on low-end PCs.
 
 ## Latest release
 * **[Download](https://github.com/KykemanovDaniil/blocks2d/releases/latest)**
