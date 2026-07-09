@@ -12,6 +12,7 @@ public:
 
     // LERP
     void setLerp(float lerp) noexcept { m_lerp = lerp; }
+    float getLerp() const noexcept { return m_lerp; }
 
     // CENTER
     void setCenter(const sf::Vector2f center) noexcept;

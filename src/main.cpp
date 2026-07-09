@@ -4,6 +4,7 @@
 #include <optional>
 
 #include "src/core/Config.hpp"
+#include "src/core/tickManager/TickManager.hpp" 
 
 #include "src/player/Player.hpp"
 #include "src/camera/Camera.hpp"
@@ -17,7 +18,8 @@ int main() {
     initBlockData();
     initWallData();
 
-    sf::Clock clock;
+    TickManager tickManager;
+    tickManager.restart(); 
 
     WorldManager worldManager;
     worldManager.loadAtlasTexture("res/textures/blockAtlas.png");
@@ -32,7 +34,8 @@ int main() {
     int currentFps = 0;
 
     while (window.isOpen()) {
-        float deltaTime = clock.restart().asSeconds();
+        tickManager.update();
+        float deltaTime = tickManager.getLastDeltaTime();
 
         fpsTimer += deltaTime;
         frameCount++;
@@ -56,7 +59,9 @@ int main() {
             }
         }
 
-        player.update(deltaTime);
+        while (tickManager.checkTick()) {
+            player.update(tickManager.getTimePerTick());
+        }
 
         float zoomSpeed = 3.5f; 
 
@@ -68,8 +73,6 @@ int main() {
         }
 
         camera.updateLerp(player.getPosition(), deltaTime);
-
-        // RENDER
 
         window.clear(sf::Color{82, 176, 255, 255});
 

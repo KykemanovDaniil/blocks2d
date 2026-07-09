@@ -10,7 +10,7 @@ void WorldManager::createWorld(int size) {
         chunk.setLocalX(i);
         generator.generate(chunk, chunk.getLocalX()); 
         
-        m_activeChunks[i] = chunk;
+        m_activeChunks[i] = std::move(chunk);
     }
 }
 
@@ -38,13 +38,14 @@ void WorldManager::draw(sf::RenderTarget& target, const Player& player, const Ca
     int startChunkX = static_cast<int>(std::floor(cameraLeft / CHUNK_W_PIXELS));
     int endChunkX = static_cast<int>(std::floor(cameraRight / CHUNK_W_PIXELS));
 
+    startChunkX -= 1; 
+    endChunkX += 1;
+
     for (int x = startChunkX; x <= endChunkX; ++x) {
         auto it = m_activeChunks.find(x);
         
         if (it != m_activeChunks.end()) {
-            if (isChunkVisible(it->second, cameraLeft, cameraRight)) {
-                it->second.draw(target, m_blockAtlas);
-            }
+            it->second.draw(target, m_blockAtlas);
         }
     }
 }
