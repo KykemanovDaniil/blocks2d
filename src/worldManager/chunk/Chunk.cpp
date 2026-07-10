@@ -1,6 +1,41 @@
 #include "Chunk.hpp"
 #include "src/worldManager/TileData/TileData.hpp"
 
+float Chunk::getGlobalX() const noexcept {
+    float globalX{static_cast<float>(m_x * static_cast<int>(CHUNK_W)) * TILE_SIZE};
+    return globalX;
+}
+
+
+
+BlockType Chunk::getLocalBlock(unsigned int x, unsigned int y) noexcept {
+    if (x < CHUNK_W && y < CHUNK_H) {
+        return blocks[x + (y * CHUNK_W)];
+    }
+    return BlockType::Air;
+}
+
+void Chunk::setLocalBlock(unsigned int x, unsigned int y, BlockType type) noexcept {
+    if (x < CHUNK_W && y < CHUNK_H) {
+        blocks[x + (y * CHUNK_W)] = type;
+    }
+}
+
+
+WallType Chunk::getLocalWall(unsigned int x, unsigned int y) noexcept {
+    if (x < CHUNK_W && y < CHUNK_H) {
+        return walls[x + (y * CHUNK_W)];
+    }
+    return WallType::None;
+}
+
+void Chunk::setLocalWall(unsigned int x, unsigned int y, WallType type) noexcept {
+    if (x < CHUNK_W && y < CHUNK_H) {
+        walls[x + (y * CHUNK_W)] = type;
+    }
+}
+
+
 void Chunk::updateGeometry() {
     m_mesh.setPrimitiveType(sf::PrimitiveType::Triangles);
 

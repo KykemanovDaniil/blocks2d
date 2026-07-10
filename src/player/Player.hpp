@@ -5,22 +5,15 @@ class Player {
 public:
     Player();
 
-    void setPosition(const sf::Vector2f position) noexcept {
-        m_position = position;
-    }
+    // POSIION
+    void setPosition(const sf::Vector2f position) noexcept { m_position = position; }
+    sf::Vector2f getPosition() const noexcept { return m_position; }
 
-    sf::Vector2f getPosition() const noexcept {
-        return m_position;
-    }
+    // SPEED
+    float getSpeed() const noexcept { return m_speed; }
+    void setSpeed(float speed) noexcept { m_speed = speed; }
 
-    float getSpeed() const noexcept {
-        return m_speed;
-    }
-
-    void setSpeed(float speed) {
-        m_speed = speed;
-    }
-
+    // OTHER
     void update(float deltaTime) noexcept;
     void interpolate(float interpolationFactor) noexcept;
     

@@ -14,7 +14,7 @@ private:
 
     unsigned int calculateSurfaceY(int globalX) {
         float noiseVal = m_landscapeNoise.GetNoise(static_cast<float>(globalX), 0.0f);
-        return m_baseLevel + static_cast<int>(noiseVal * 30.0f);
+        return m_baseLevel - static_cast<int>(noiseVal * 15.0f);
     }
 
     float calculateCaveValue(int globalX, int globalY) {
@@ -26,6 +26,6 @@ private:
     void generateCaves(Chunk& chunk, int chunkX);
     void generateTrees(Chunk& chunk, int chunkX);
 
-    static constexpr int m_baseLevel = 74;
-    static constexpr int m_seaLevel = 64;
+    static constexpr int m_baseLevel = 158;
+    static constexpr int m_seaLevel = 128;
 };

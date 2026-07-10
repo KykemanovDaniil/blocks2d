@@ -1,7 +1,8 @@
-#include "src/worldGenerator/default/DefaultGenerator.hpp"
+#include "DefaultGenerator.hpp"
 #include "src/worldManager/TileType/TileType.hpp" 
 #include "src/worldGenerator/default/structure/tree/TreeGenerator.hpp"
 #include <cmath>
+#include <print>
 
 DefaultGenerator::DefaultGenerator(int seed) {
     m_landscapeNoise.SetSeed(seed);
@@ -29,7 +30,7 @@ void DefaultGenerator::generateLandscape(Chunk& chunk, int chunkX) {
         const int globalX = chunkX * static_cast<int>(CHUNK_W) + static_cast<int>(x);
         const unsigned int surfaceY = calculateSurfaceY(globalX);
         
-        for (unsigned int y = 0; y < CHUNK_H; ++y) {
+        for (unsigned int y = surfaceY + 1; y < CHUNK_H; ++y) {
             
             if (y >= CHUNK_H - 3) {
                 chunk.setLocalBlock(x, y, BlockType::Basalt);
@@ -38,10 +39,6 @@ void DefaultGenerator::generateLandscape(Chunk& chunk, int chunkX) {
             else if (y >= CHUNK_H - 29) {
                 chunk.setLocalBlock(x, y, BlockType::Andesite);
                 chunk.setLocalWall(x, y, WallType::Andesite);
-            }
-            else if (y < surfaceY) {
-                chunk.setLocalBlock(x, y, BlockType::Air);
-                chunk.setLocalWall(x, y, WallType::None);
             }
             else if (y > surfaceY && y <= surfaceY + 7) {
                 chunk.setLocalBlock(x, y, BlockType::Grus);
@@ -80,12 +77,9 @@ void DefaultGenerator::generateVegetation(Chunk& chunk, int chunkX) {
 void DefaultGenerator::generateCaves(Chunk& chunk, int chunkX) {
     for (unsigned int x = 0; x < CHUNK_W; ++x) {
         const int globalX = chunkX * static_cast<int>(CHUNK_W) + static_cast<int>(x);
-        
-        for (unsigned int y = 0; y < CHUNK_H; ++y) {
-            if (y >= CHUNK_H - 3) {
-                continue;
-            }
+        unsigned int surfaceY = calculateSurfaceY(globalX);
 
+        for (unsigned int y = surfaceY; y < CHUNK_H - 3; ++y) {
             const float caveNoiseValue = calculateCaveValue(globalX, static_cast<int>(y));
 
             if (std::abs(caveNoiseValue) < 0.06f) {
@@ -100,13 +94,11 @@ void DefaultGenerator::generateTrees(Chunk& chunk, int chunkX) {
         int globalX = chunkX * CHUNK_W + x;
         unsigned int surfaceY = calculateSurfaceY(globalX);
 
-        // 1. Деревья не должны расти на каждом блоке. Сделаем шанс появления (например, 15%)
         if (std::rand() % 100 > 15) {
             continue; 
         }
 
-        // 2. Проверяем, что под деревом реально Трава, а не воздух из-за пещеры или генерации
-        if (chunk.getLocalBlock(x, surfaceY) != BlockType::Grass) {
+       if (chunk.getLocalBlock(x, surfaceY) != BlockType::Grass) {
             continue;
         }
 

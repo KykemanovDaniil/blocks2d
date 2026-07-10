@@ -2,7 +2,7 @@
 #include <cstdint>
 
 enum class BlockType : uint8_t {
-    Air = 0, 
+    Air, 
     Loam, 
     Grass, 
     Grus,

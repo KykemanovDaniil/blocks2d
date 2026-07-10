@@ -13,6 +13,7 @@
 
 int main() {
     sf::RenderWindow window(sf::VideoMode({Config::windowW, Config::windowH}), "Blocks2d");
+    window.setFramerateLimit(Config::windowFps);
     window.setVerticalSyncEnabled(true); 
 
     initBlockData();
@@ -27,7 +28,6 @@ int main() {
 
     Player player;
     Camera camera;
-    camera.setZoom(1.0f);
         
     float fpsTimer = 0.0f;
     int frameCount = 0;

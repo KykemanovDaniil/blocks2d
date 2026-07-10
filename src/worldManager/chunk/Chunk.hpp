@@ -16,51 +16,21 @@ class Chunk {
 public:
     void updateGeometry();
 
-    int getLocalX() noexcept {
-        return m_x;
-    }
-    void setLocalX(int x) noexcept {
-        m_x = x;
-    }
+    int getLocalX() noexcept { return m_x; }
+    void setLocalX(int x) noexcept { m_x = x; }
 
-    float getGlobalX() const noexcept {
-        float globalX{static_cast<float>(m_x * static_cast<int>(CHUNK_W)) * TILE_SIZE};
-        return globalX;
-    }
+    float getGlobalX() const noexcept;
 
     // FOR BLOCKS
-
-    BlockType getLocalBlock(unsigned int x, unsigned int y) noexcept {
-        if (x < CHUNK_W && y < CHUNK_H) {
-            return blocks[x + (y * CHUNK_W)];
-        }
-        return BlockType::Air;
-    }
-
-    void setLocalBlock(unsigned int x, unsigned int y, BlockType type) noexcept {
-        if (x < CHUNK_W && y < CHUNK_H) {
-            blocks[x + (y * CHUNK_W)] = type;
-        }
-    }
+    BlockType getLocalBlock(unsigned int x, unsigned int y) noexcept;
+    void setLocalBlock(unsigned int x, unsigned int y, BlockType type) noexcept;
 
     // FOR WALLS
+    WallType getLocalWall(unsigned int x, unsigned int y) noexcept;
+    void setLocalWall(unsigned int x, unsigned int y, WallType type) noexcept;
 
-    WallType getLocalWall(unsigned int x, unsigned int y) noexcept {
-        if (x < CHUNK_W && y < CHUNK_H) {
-            return walls[x + (y * CHUNK_W)];
-        }
-        return WallType::None;
-    }
-
-    void setLocalWall(unsigned int x, unsigned int y, WallType type) noexcept {
-        if (x < CHUNK_W && y < CHUNK_H) {
-            walls[x + (y * CHUNK_W)] = type;
-        }
-    }
-
-    void draw(sf::RenderTarget& target, const sf::Texture& atlas) const {
-        target.draw(m_mesh, &atlas);
-    }
+    void draw(sf::RenderTarget& target, const sf::Texture& atlas) const { target.draw(m_mesh, &atlas); }
+    
 private:
     int m_x = 0;
 
