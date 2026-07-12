@@ -19,6 +19,10 @@ void initBlockData() {
     BlockRegistry[static_cast<size_t>(BlockType::Andesite)] = {BlockType::Andesite, true, 5};
 
     BlockRegistry[static_cast<size_t>(BlockType::Basalt)] = {BlockType::Basalt, true, 6};
+
+    BlockRegistry[static_cast<size_t>(BlockType::Oak)] = {BlockType::Oak, true, 7};
+
+    BlockRegistry[static_cast<size_t>(BlockType::Leaves)] = {BlockType::Leaves, true, 8};
 }
 
 void initWallData() {
@@ -37,4 +41,8 @@ void initWallData() {
     WallRegistry[static_cast<size_t>(WallType::Andesite)] = {WallType::Andesite, 5};
 
     WallRegistry[static_cast<size_t>(WallType::Basalt)] = {WallType::Basalt, 6};
+
+    WallRegistry[static_cast<size_t>(WallType::Oak)] = {WallType::Oak, 7};
+
+    WallRegistry[static_cast<size_t>(WallType::Leaves)] = {WallType::Leaves, 8};
 }

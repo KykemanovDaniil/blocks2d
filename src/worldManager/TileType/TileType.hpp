@@ -10,6 +10,8 @@ enum class BlockType : uint8_t {
     Limestone,
     Andesite,
     Basalt,
+    Oak,
+    Leaves
 };
 
 enum class WallType : uint8_t {
@@ -21,4 +23,6 @@ enum class WallType : uint8_t {
     Limestone,
     Andesite,
     Basalt,
+    Oak,
+    Leaves
 };

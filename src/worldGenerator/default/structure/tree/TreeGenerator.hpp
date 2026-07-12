@@ -9,7 +9,7 @@ void generateTree(Chunk& chunk, unsigned int x, unsigned int surfaceY) {
         int wallY = static_cast<int>(surfaceY) - i;
             
         if (wallY >= 0) {
-            chunk.setLocalWall(x, static_cast<unsigned int>(wallY), WallType::Andesite);
+            chunk.setLocalWall(x, static_cast<unsigned int>(wallY), WallType::Oak);
         }
     }
 
@@ -24,7 +24,7 @@ void generateTree(Chunk& chunk, unsigned int x, unsigned int surfaceY) {
                     continue;
                 }
                     
-                chunk.setLocalWall(static_cast<unsigned int>(leafX), static_cast<unsigned int>(leafY), WallType::Basalt);
+                chunk.setLocalWall(static_cast<unsigned int>(leafX), static_cast<unsigned int>(leafY), WallType::Leaves);
                 
             }
         }

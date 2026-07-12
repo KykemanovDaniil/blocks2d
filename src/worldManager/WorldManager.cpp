@@ -24,7 +24,7 @@ void WorldManager::loadAtlasTexture(const char* path) {
     
     sf::Texture::bind(&m_blockAtlas);
     
-    GLint maxLevel = 5; 
+    GLint maxLevel = 4; 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, maxLevel);
     
     sf::Texture::bind(nullptr);
