@@ -1,5 +1,6 @@
 #pragma once 
 #include "src/worldManager/chunk/Chunk.hpp" 
+#include "src/worldManager/WorldManager.hpp"
 #include "libs/noise/FastNoiseLite.h"
 
 class DefaultGenerator {
@@ -7,6 +8,8 @@ public:
     DefaultGenerator(int seed = 0);
 
     void generate(Chunk& chunk, int chunkX);
+    
+    void generateTrees(WorldManager& world, int size);
 
 private:
     FastNoiseLite m_landscapeNoise;
@@ -24,7 +27,6 @@ private:
     void generateLandscape(Chunk& chunk, int chunkX);
     void generateVegetation(Chunk& chunk, int chunkX);
     void generateCaves(Chunk& chunk, int chunkX);
-    void generateTrees(Chunk& chunk, int chunkX);
 
     static constexpr int m_baseLevel = 158;
     static constexpr int m_seaLevel = 128;

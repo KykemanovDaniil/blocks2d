@@ -20,7 +20,6 @@ void DefaultGenerator::generate(Chunk& chunk, int chunkX) {
     generateLandscape(chunk, chunkX);
     generateVegetation(chunk, chunkX);
     generateCaves(chunk, chunkX);
-    generateTrees(chunk, chunkX);
 
     chunk.updateGeometry();
 }
@@ -89,20 +88,30 @@ void DefaultGenerator::generateCaves(Chunk& chunk, int chunkX) {
     }
 }
 
-void DefaultGenerator::generateTrees(Chunk& chunk, int chunkX) {
-    for (unsigned int x = 0; x < CHUNK_W; ++x) {
-        int globalX = chunkX * CHUNK_W + x;
-        unsigned int surfaceY = calculateSurfaceY(globalX);
+void DefaultGenerator::generateTrees(WorldManager& world, int size) {
+    for (int i = -size; i < size; ++i) {
+        for (unsigned int x = 0; x < CHUNK_W; ++x) {
+            int globalBlockX = (i * static_cast<int>(CHUNK_W)) + static_cast<int>(x);
+            unsigned int surfaceY = calculateSurfaceY(globalBlockX);
 
-        if (std::rand() % 100 > 15) {
-            continue; 
+            if (std::rand() % 100 > 15) continue; 
+            if (world.getGlobalBlock(globalBlockX, static_cast<int>(surfaceY)) != BlockType::Grass) continue;
+
+            unsigned int treeHeight = 4 + (std::rand() % 10);
+            for (unsigned int h = 1; h <= treeHeight; ++h) {
+                int wallY = static_cast<int>(surfaceY) - h;
+                if (wallY >= 0) world.setGlobalWall(globalBlockX, wallY, WallType::Oak);
+            }
+
+            int topY = static_cast<int>(surfaceY) - treeHeight;
+            for (int leafY = topY - 4; leafY <= topY; ++leafY) {
+                for (int leafX = globalBlockX - 2; leafX <= globalBlockX + 2; ++leafX) {
+                    if (leafY >= 0) {
+                        if (leafX == globalBlockX && leafY > topY - 1) continue;
+                        world.setGlobalWall(leafX, leafY, WallType::Leaves);
+                    }
+                }
+            }
         }
-
-       if (chunk.getLocalBlock(x, surfaceY) != BlockType::Grass) {
-            continue;
-        }
-
-        generateTree(chunk, x, surfaceY);
-
     }
 }
